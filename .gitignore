@@ -1,0 +1,10 @@
+# Node.js dependencies
+node_modules/
+**node_modules
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Node.js logs
+*.log
