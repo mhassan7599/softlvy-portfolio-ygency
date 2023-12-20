@@ -1,10 +1,24 @@
 import { useFormik } from "formik";
-import { Fragment } from "react";
+import { useMutation, gql } from '@apollo/client';
 import * as Yup from 'yup';
+import client from '../../apollo/client';
+import { Fragment } from "react";
 
 // const servicesSelect = ['Web Development', 'App Development', 'Search Engine Optimization', 'React.Js Development', 'UI/UX Design']
 
+const CREATE_POST = gql`
+  mutation CreatePost($name: String!, $email: String!, $message: String!) {
+    createPost(name: $name, email: $email, message: $message) {
+      id
+      name
+      email
+      message
+    }
+  }
+`;
+
 const SideBar = () => {
+  const [createPost] = useMutation(CREATE_POST, { client });
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -18,9 +32,20 @@ const SideBar = () => {
       // services: Yup.string().required('Required Field!'),
       message: Yup.string().required('Required Field!'),
     }),
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      resetForm();
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const { data } = await createPost({
+          variables: {
+            name: values.name,
+            email: values.email,
+            message: values.message,
+          },
+        });
+        console.log('Created Post:', data.createPost);
+        resetForm();
+      } catch (error) {
+        console.error('Error creating post:', error);
+      }
     },
   });
   return (

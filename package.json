@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.8",
     "@next/font": "13.3.0",
     "formik": "^2.4.5",
     "next": "13.3.0",
