@@ -1,8 +1,7 @@
-import { aboutChooseItem, aboutTeam, aboutTestimonialData, projectsCount } from "@/mock-data/about";
+import { aboutChooseItem, aboutTeam, aboutTestimonialData, headLineArea, projectsCount } from "@/mock-data/about";
 import Layout from "@/src/layout/Layout";
 import { sliderProps } from "@/src/sliderProps";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const Counter = dynamic(() => import("@/src/components/Counter"), {
@@ -93,42 +92,12 @@ const About = () => {
         <div className="container-fluid">
           <div className="headline-wrap marquee">
             <span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Design &amp; Branding</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Web Development</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Mobile Apps</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Design &amp; Branding</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Web Development</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Mobile Apps</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Design &amp; Branding</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Web Development</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Mobile Apps</b>
-              </span>
+              {headLineArea.map((item, index) => (
+                <span className="marquee-item" key={index}>
+                  <i className="fas fa-star-of-life" />
+                  <b>{item}</b>
+                </span>
+              ))}
             </span>
           </div>
         </div>

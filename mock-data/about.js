@@ -124,3 +124,5 @@ export const aboutChooseItem = [
   { title: 'Edit your mobile view', desc: 'Enhance your mobile interface effortlessly with our editing tools, ensuring optimal user experiences and seamless navigation.', icon: 'flaticon-mobile-banking' },
   { title: 'Optimize search engines', desc: 'Enhance visibility and ranking on search engines through strategic optimization techniques, driving increased traffic and audience engagement.', icon: 'flaticon-optimization-1' },
 ]
+
+export const headLineArea = ['Design & Branding', 'Web Development', 'Mobile Apps', 'Design & Branding', 'Web Development', 'Mobile Apps', 'Design & Branding', 'Web Development', 'Mobile Apps',]

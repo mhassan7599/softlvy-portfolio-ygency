@@ -30,11 +30,11 @@ const DaskTopMenu = () => {
           About Us
         </Link>
       </li>
-      <li>
-        <Link legacyBehavior href="products">
+      {/* <li>
+        <Link legacyBehavior href="shop">
           Products
         </Link>
-      </li>
+      </li> */}
       <li >
         <Link legacyBehavior href="services">
           Services

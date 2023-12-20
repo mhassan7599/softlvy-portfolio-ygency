@@ -1,3 +1,4 @@
+import { aboutCounter, chooseUs, headLineWrapMarquee, headlineArea, provideSevices, recentWorkGallery, skillsWrap, teamMembers } from "@/mock-data/home";
 import Layout from "@/src/layout/Layout";
 import { sliderProps } from "@/src/sliderProps";
 import dynamic from "next/dynamic";
@@ -127,58 +128,12 @@ const Index = () => {
             </div>
           </div>
           <div className="skills-wrap">
-            <div className="skill-item">
-              <img src="assets/images/skills/skill1.png" alt="Skill Icon" />
-              <span className="text">Bootstrap</span>
-            </div>
-            <div className="skill-item">
-              <img src="assets/images/skills/skill2.png" alt="Skill Icon" />
-              <span className="text">HTML</span>
-            </div>
-            <div className="skill-item">
-              <img src="assets/images/skills/skill3.png" alt="Skill Icon" />
-              <span className="text">CSS</span>
-            </div>
-            <div className="skill-item">
-              <img src="assets/images/skills/skill4.png" alt="Skill Icon" />
-              <span className="text">javascript</span>
-            </div>
-            <div className="skill-item">
-              <img src="assets/images/skills/skill5.png" alt="Skill Icon" />
-              <span className="text">React</span>
-            </div>
-            <div className="skill-item">
-              <img src="assets/images/skills/skill6.png" alt="Skill Icon" />
-              <span className="text">WordPress</span>
-            </div>
-            <div className="skill-item">
-              <img src="assets/images/skills/skill7.png" alt="Skill Icon" />
-              <span className="text">php</span>
-            </div>
-            <div className="skill-item">
-              <img src="assets/images/skills/skill8.png" alt="Skill Icon" />
-              <span className="text">node.js</span>
-            </div>
-            <div className="skill-item">
-              <img src="assets/images/skills/skill9.png" alt="Skill Icon" />
-              <span className="text">Sass</span>
-            </div>
-            <div className="skill-item">
-              <img src="assets/images/skills/skill10.png" alt="Skill Icon" />
-              <span className="text">Angular</span>
-            </div>
-            <div className="skill-item">
-              <img src="assets/images/skills/skill11.png" alt="Skill Icon" />
-              <span className="text">Shopify</span>
-            </div>
-            <div className="skill-item">
-              <img src="assets/images/skills/skill12.png" alt="Skill Icon" />
-              <span className="text">Elementor</span>
-            </div>
-            <div className="skill-item">
-              <img src="assets/images/skills/skill13.png" alt="Skill Icon" />
-              <span className="text">Vue.js</span>
-            </div>
+            {skillsWrap?.map((item, i) => (
+              <div className="skill-item" key={i}>
+                <img src={item.img} alt="Skill Icon" />
+                <span className="text">{item.title}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -200,26 +155,16 @@ const Index = () => {
                 </div>
                 <div className="about-counter">
                   <div className="row">
-                    <div className="col-md-4 col-sm-6">
-                      <div className="counter-item-two counter-text-wrap wow fadeInUp delay-0-2s">
-                        <Counter end={100} extraClass={"percent"} />
-                        <span className="counter-title">
-                          Clients Satisfactions
-                        </span>
+                    {aboutCounter?.map((item, index) => (
+                      <div className="col-md-4 col-sm-6" key={index}>
+                        <div className={`counter-item-two counter-text-wrap wow fadeInUp delay-0-${index + 2}s`}>
+                          <Counter end={item.count} extraClass={"percent"} />
+                          <span className="counter-title">
+                            {item.title}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-md-4 col-sm-6">
-                      <div className="counter-item-two counter-text-wrap wow fadeInUp delay-0-3s">
-                        <Counter end={93} extraClass={"percent"} />
-                        <span className="counter-title">Success Rating</span>
-                      </div>
-                    </div>
-                    <div className="col-md-4 col-sm-6">
-                      <div className="counter-item-two counter-text-wrap wow fadeInUp delay-0-4s">
-                        <Counter end={35} extraClass={"percent"} />
-                        <span className="counter-title">Project Complete</span>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -252,206 +197,33 @@ const Index = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-xl-3 col-lg-4 col-sm-6">
-              <div className="service-four-item wow fadeInUp delay-0-2s">
-                <div className="content">
-                  <div className="icon-btn">
-                    <i className="flaticon-development" />
-                    <Link legacyBehavior href="/service-details">
-                      <a className="more-btn">
-                        <i className="far fa-arrow-right" />
-                      </a>
-                    </Link>
+            {provideSevices?.map((item, index) => (
+              <div className="col-xl-3 col-lg-4 col-sm-6" key={index}>
+                <div className={`service-four-item ${index % 2 === 0 ? 'wow fadeInUp' : 'wow fadeInDown'} delay-0-${index + 2}s`}>
+                  <div className="content">
+                    <div className="icon-btn">
+                      <i className={item.icon} />
+                      <Link legacyBehavior href={item.path}>
+                        <a className="more-btn">
+                          <i className="far fa-arrow-right" />
+                        </a>
+                      </Link>
+                    </div>
+                    <h5>
+                      <Link legacyBehavior href={item.path}>
+                        <a>{item.title}</a>
+                      </Link>
+                    </h5>
                   </div>
-                  <h5>
-                    <Link legacyBehavior href="/service-details">
-                      <a>Web Development</a>
-                    </Link>
-                  </h5>
-                </div>
-                <div className="image">
-                  <img
-                    src="assets/images/services/service1.jpg"
-                    alt="Service"
-                  />
+                  <div className="image">
+                    <img
+                      src={item.img}
+                      alt="Service"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-sm-6">
-              <div className="service-four-item wow fadeInDown delay-0-2s">
-                <div className="content">
-                  <div className="icon-btn">
-                    <i className="flaticon-mobile-development" />
-                    <Link legacyBehavior href="/service-details">
-                      <a className="more-btn">
-                        <i className="far fa-arrow-right" />
-                      </a>
-                    </Link>
-                  </div>
-                  <h5>
-                    <Link legacyBehavior href="/service-details">
-                      <a>Mobile Application</a>
-                    </Link>
-                  </h5>
-                </div>
-                <div className="image">
-                  <img
-                    src="assets/images/services/service2.jpg"
-                    alt="Service"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-sm-6">
-              <div className="service-four-item wow fadeInUp delay-0-2s">
-                <div className="content">
-                  <div className="icon-btn">
-                    <i className="flaticon-brainstorming" />
-                    <Link legacyBehavior href="/service-details">
-                      <a className="more-btn">
-                        <i className="far fa-arrow-right" />
-                      </a>
-                    </Link>
-                  </div>
-                  <h5>
-                    <Link legacyBehavior href="/service-details">
-                      <a>Team Agumentation</a>
-                    </Link>
-                  </h5>
-                </div>
-                <div className="image">
-                  <img
-                    src="assets/images/services/service3.jpg"
-                    alt="Service"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-sm-6">
-              <div className="service-four-item wow fadeInDown delay-0-2s">
-                <div className="content">
-                  <div className="icon-btn">
-                    <i className="flaticon-brainstorming" />
-                    <Link legacyBehavior href="/service-details">
-                      <a className="more-btn">
-                        <i className="far fa-arrow-right" />
-                      </a>
-                    </Link>
-                  </div>
-                  <h5>
-                    <Link legacyBehavior href="/service-details">
-                      <a>Design &amp; Branding</a>
-                    </Link>
-                  </h5>
-                </div>
-                <div className="image">
-                  <img
-                    src="assets/images/services/service4.jpg"
-                    alt="Service"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-sm-6">
-              <div className="service-four-item wow fadeInUp delay-0-2s">
-                <div className="content">
-                  <div className="icon-btn">
-                    <i className="flaticon-abstract" />
-                    <Link legacyBehavior href="/service-details">
-                      <a className="more-btn">
-                        <i className="far fa-arrow-right" />
-                      </a>
-                    </Link>
-                  </div>
-                  <h5>
-                    <Link legacyBehavior href="/service-details">
-                      <a>React Js Development</a>
-                    </Link>
-                  </h5>
-                </div>
-                <div className="image">
-                  <img
-                    src="assets/images/services/service5.jpg"
-                    alt="Service"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-sm-6">
-              <div className="service-four-item wow fadeInDown delay-0-2s">
-                <div className="content">
-                  <div className="icon-btn">
-                    <i className="flaticon-ux" />
-                    <Link legacyBehavior href="/service-details">
-                      <a className="more-btn">
-                        <i className="far fa-arrow-right" />
-                      </a>
-                    </Link>
-                  </div>
-                  <h5>
-                    <Link legacyBehavior href="/service-details">
-                      <a>Front-end development</a>
-                    </Link>
-                  </h5>
-                </div>
-                <div className="image">
-                  <img
-                    src="assets/images/services/service6.jpg"
-                    alt="Service"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-sm-6">
-              <div className="service-four-item wow fadeInUp delay-0-2s">
-                <div className="content">
-                  <div className="icon-btn">
-                    <i className="flaticon-optimization" />
-                    <Link legacyBehavior href="/service-details">
-                      <a className="more-btn">
-                        <i className="far fa-arrow-right" />
-                      </a>
-                    </Link>
-                  </div>
-                  <h5>
-                    <Link legacyBehavior href="/service-details">
-                      <a>Jamstack Development</a>
-                    </Link>
-                  </h5>
-                </div>
-                <div className="image">
-                  <img
-                    src="assets/images/services/service7.jpg"
-                    alt="Service"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-sm-6">
-              <div className="service-four-item wow fadeInDown delay-0-2s">
-                <div className="content">
-                  <div className="icon-btn">
-                    <i className="flaticon-goal" />
-                    <Link legacyBehavior href="/service-details">
-                      <a className="more-btn">
-                        <i className="far fa-arrow-right" />
-                      </a>
-                    </Link>
-                  </div>
-                  <h5>
-                    <Link legacyBehavior href="/service-details">
-                      <a>MVP Development</a>
-                    </Link>
-                  </h5>
-                </div>
-                <div className="image">
-                  <img
-                    src="assets/images/services/service8.jpg"
-                    alt="Service"
-                  />
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -461,30 +233,12 @@ const Index = () => {
         <div className="container-fluid">
           <div className="headline-wrap marquee">
             <span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Web Design</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Product Design</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Web Development</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>SEO Optimization</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>UX/UI Strategy</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Graphics</b>
-              </span>
+              {headlineArea.map((item, index) => (
+                <span className="marquee-item" key={index}>
+                  <i className="fas fa-star-of-life" />
+                  <b>{item}</b>
+                </span>
+              ))}
             </span>
           </div>
         </div>
@@ -509,132 +263,29 @@ const Index = () => {
             </div>
           </div>
           <div className="row gap-90">
-            <div className="col-lg-6">
-              <div className="project-timeline-two wow fadeInUp delay-0-2s">
-                <span className="serial-number">01</span>
-                <h4>
-                  <Link legacyBehavior href="/project-details">
-                    <a>Business Task Management Dashboard Design</a>
-                  </Link>
-                </h4>
-                <div className="image">
-                  <img
-                    src="assets/images/projects/project-timeline-two1.jpg"
-                    alt="Project TimeLine Image"
-                  />
-                </div>
-                <div className="right-btn">
-                  <a href="#">
-                    <i className="fal fa-long-arrow-right" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="project-timeline-two wow fadeInUp delay-0-4s">
-                <span className="serial-number">02</span>
-                <h4>
-                  <Link legacyBehavior href="/project-details">
-                    <a>PSD, Figma &amp; XD to HTML Design &amp; Development</a>
-                  </Link>
-                </h4>
-                <div className="image">
-                  <img
-                    src="assets/images/projects/project-timeline-two1.jpg"
-                    alt="Project TimeLine Image"
-                  />
-                </div>
-                <div className="right-btn">
-                  <a href="#">
-                    <i className="fal fa-long-arrow-right" />
-                  </a>
+            {recentWorkGallery?.map((item, index) => (
+              <div className="col-lg-6" key={index}>
+                <div className={`project-timeline-two wow fadeInUp delay-0-${index + 2}s`}>
+                  <span className="serial-number">{`0${index + 1}`}</span>
+                  <h4>
+                    <Link legacyBehavior href="/project-details">
+                      <a>{item.title}</a>
+                    </Link>
+                  </h4>
+                  <div className="image">
+                    <img
+                      src={item.imageSrc}
+                      alt="Project TimeLine Image"
+                    />
+                  </div>
+                  <div className="right-btn">
+                    <a href="#">
+                      <i className="fal fa-long-arrow-right" />
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="project-timeline-two wow fadeInUp delay-0-2s">
-                <span className="serial-number">03</span>
-                <h4>
-                  <Link legacyBehavior href="/project-details">
-                    <a>Mobile Application Design &amp; Development</a>
-                  </Link>
-                </h4>
-                <div className="image">
-                  <img
-                    src="assets/images/projects/project-timeline-two1.jpg"
-                    alt="Project TimeLine Image"
-                  />
-                </div>
-                <div className="right-btn">
-                  <a href="#">
-                    <i className="fal fa-long-arrow-right" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="project-timeline-two wow fadeInUp delay-0-4s">
-                <span className="serial-number">04</span>
-                <h4>
-                  <Link legacyBehavior href="/project-details">
-                    <a>Business Development and Marketing Strategy</a>
-                  </Link>
-                </h4>
-                <div className="image">
-                  <img
-                    src="assets/images/projects/project-timeline-two1.jpg"
-                    alt="Project TimeLine Image"
-                  />
-                </div>
-                <div className="right-btn">
-                  <a href="#">
-                    <i className="fal fa-long-arrow-right" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="project-timeline-two wow fadeInUp delay-0-2s">
-                <span className="serial-number">05</span>
-                <h4>
-                  <Link legacyBehavior href="/project-details">
-                    <a>eCommerce React Website Development</a>
-                  </Link>
-                </h4>
-                <div className="image">
-                  <img
-                    src="assets/images/projects/project-timeline-two1.jpg"
-                    alt="Project TimeLine Image"
-                  />
-                </div>
-                <div className="right-btn">
-                  <a href="#">
-                    <i className="fal fa-long-arrow-right" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="project-timeline-two wow fadeInUp delay-0-4s">
-                <span className="serial-number">06</span>
-                <h4>
-                  <Link legacyBehavior href="/project-details">
-                    <a>3D Flat UI UX Landing Page Design &amp; Development</a>
-                  </Link>
-                </h4>
-                <div className="image">
-                  <img
-                    src="assets/images/projects/project-timeline-two1.jpg"
-                    alt="Project TimeLine Image"
-                  />
-                </div>
-                <div className="right-btn">
-                  <a href="#">
-                    <i className="fal fa-long-arrow-right" />
-                  </a>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -653,199 +304,24 @@ const Index = () => {
         </div>
         <div className="container-fluid">
           <div className="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 justify-content-center">
-            <div className="col">
-              <div className="team-member wow fadeInUp delay-0-2s">
-                <div className="image">
-                  <img src="assets/images/team/member6.jpg" alt="Team Member" />
-                </div>
-                <div className="content">
-                  <h4>Patrick V. Schroeder</h4>
-                  <span>UI/UX Designer</span>
-                  <Link legacyBehavior href="/team-details">
-                    <a className="read-more">
-                      <i className="far fa-arrow-right" />
-                    </a>
-                  </Link>
-                </div>
-                <div className="btn-social">
-                  <Link legacyBehavior href="/team-details">
-                    <a className="read-more">
-                      <span>View Details</span>{" "}
-                      <i className="far fa-arrow-right" />
-                    </a>
-                  </Link>
-                  <div className="social-style-two">
-                    <a href="#">
-                      <i className="fab fa-facebook-f" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-instagram" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-linkedin-in" />
-                    </a>
+            {teamMembers?.map((item, index) => (
+              <div className="col">
+                <div className={`team-member wow fadeInUp delay-0-${index + 2}s`}>
+                  <div className="image">
+                    <img src={item.imageSrc} alt="Team Member" />
+                  </div>
+                  <div className="content">
+                    <h4>{item.name}</h4>
+                    <span>{item.designation}</span>
+                    <Link legacyBehavior href="/team-details">
+                      <a className="read-more">
+                        <i className="far fa-arrow-right" />
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col">
-              <div className="team-member wow fadeInUp delay-0-3s">
-                <div className="image">
-                  <img src="assets/images/team/member7.jpg" alt="Team Member" />
-                </div>
-                <div className="content">
-                  <h4>Michael A. Braun</h4>
-                  <span>UI/UX Designer</span>
-                  <Link legacyBehavior href="/team-details">
-                    <a className="read-more">
-                      <i className="far fa-arrow-right" />
-                    </a>
-                  </Link>
-                </div>
-                <div className="btn-social">
-                  <Link legacyBehavior href="/team-details">
-                    <a className="read-more">
-                      <span>View Details</span>{" "}
-                      <i className="far fa-arrow-right" />
-                    </a>
-                  </Link>
-                  <div className="social-style-two">
-                    <a href="#">
-                      <i className="fab fa-facebook-f" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-instagram" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-linkedin-in" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="team-member wow fadeInUp delay-0-4s">
-                <div className="image">
-                  <img src="assets/images/team/member8.jpg" alt="Team Member" />
-                </div>
-                <div className="content">
-                  <h4>James V. Decastro</h4>
-                  <span>Senior Marketer</span>
-                  <Link legacyBehavior href="/team-details">
-                    <a className="read-more">
-                      <i className="far fa-arrow-right" />
-                    </a>
-                  </Link>
-                </div>
-                <div className="btn-social">
-                  <Link legacyBehavior href="/team-details">
-                    <a className="read-more">
-                      <span>View Details</span>{" "}
-                      <i className="far fa-arrow-right" />
-                    </a>
-                  </Link>
-                  <div className="social-style-two">
-                    <a href="#">
-                      <i className="fab fa-facebook-f" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-instagram" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-linkedin-in" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="team-member wow fadeInUp delay-0-5s">
-                <div className="image">
-                  <img src="assets/images/team/member9.jpg" alt="Team Member" />
-                </div>
-                <div className="content">
-                  <h4>Troy V. Richardson</h4>
-                  <span>Web Designer</span>
-                  <Link legacyBehavior href="/team-details">
-                    <a className="read-more">
-                      <i className="far fa-arrow-right" />
-                    </a>
-                  </Link>
-                </div>
-                <div className="btn-social">
-                  <Link legacyBehavior href="/team-details">
-                    <a className="read-more">
-                      <span>View Details</span>{" "}
-                      <i className="far fa-arrow-right" />
-                    </a>
-                  </Link>
-                  <div className="social-style-two">
-                    <a href="#">
-                      <i className="fab fa-facebook-f" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-instagram" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-linkedin-in" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="team-member wow fadeInUp delay-0-6s">
-                <div className="image">
-                  <img
-                    src="assets/images/team/member10.jpg"
-                    alt="Team Member"
-                  />
-                </div>
-                <div className="content">
-                  <h4>Michael A. Braun</h4>
-                  <span>Apps Designer</span>
-                  <Link legacyBehavior href="/team-details">
-                    <a className="read-more">
-                      <i className="far fa-arrow-right" />
-                    </a>
-                  </Link>
-                </div>
-                <div className="btn-social">
-                  <Link legacyBehavior href="/team-details">
-                    <a className="read-more">
-                      <span>View Details</span>{" "}
-                      <i className="far fa-arrow-right" />
-                    </a>
-                  </Link>
-                  <div className="social-style-two">
-                    <a href="#">
-                      <i className="fab fa-facebook-f" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-instagram" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-linkedin-in" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -861,54 +337,17 @@ const Index = () => {
                   <h2>Web Design Company That You Can Trust</h2>
                 </div>
                 <div className="row gap-60">
-                  <div className="col-md-6">
-                    <div className="why-choose-item wow fadeInUp delay-0-2s">
-                      <div className="why-choose-header">
-                        <i className="far fa-chevron-right" />
-                        <h5>Competitive rates</h5>
+                  {chooseUs.map((item, index) => (
+                    <div className="col-md-6" key={index}>
+                      <div className={`why-choose-item wow fadeInUp delay-0-${index + 2}s`}>
+                        <div className="why-choose-header">
+                          <i className="far fa-chevron-right" />
+                          <h5>{item.title}</h5>
+                        </div>
+                        <p>{item.desc}</p>
                       </div>
-                      <p>
-                        We use strategic marketing tactics that have been proven
-                        programming
-                      </p>
                     </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="why-choose-item wow fadeInUp delay-0-3s">
-                      <div className="why-choose-header">
-                        <i className="far fa-chevron-right" />
-                        <h5>Premium Development</h5>
-                      </div>
-                      <p>
-                        Sed perspiciatis unde omnie natue site voluptatem
-                        accusan doloremque
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="why-choose-item wow fadeInUp delay-0-2s">
-                      <div className="why-choose-header">
-                        <i className="far fa-chevron-right" />
-                        <h5>No contracts needed</h5>
-                      </div>
-                      <p>
-                        You can increase, pause or stop our services at any time
-                        leaving
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="why-choose-item wow fadeInUp delay-0-3s">
-                      <div className="why-choose-header">
-                        <i className="far fa-chevron-right" />
-                        <h5>Retina Ready &amp; Flexible</h5>
-                      </div>
-                      <p>
-                        Devices show more pixels square inch resulting sharperes
-                        images Content
-                      </p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -1044,30 +483,12 @@ const Index = () => {
         <div className="container-fluid">
           <div className="headline-wrap marquee">
             <span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Clients Say Us</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Global Clients</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Awards Winning</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Clients Say Us</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Global Clients</b>
-              </span>
-              <span className="marquee-item">
-                <i className="fas fa-star-of-life" />
-                <b>Awards Winning</b>
-              </span>
+              {headLineWrapMarquee?.map((item, index) => (
+                <span className="marquee-item" key={index}>
+                  <i className="fas fa-star-of-life" />
+                  <b>{item}</b>
+                </span>
+              ))}
             </span>
           </div>
         </div>
