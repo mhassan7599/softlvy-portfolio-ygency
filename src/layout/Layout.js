@@ -1,5 +1,4 @@
 import { Fragment, useEffect } from "react";
-import niceSelect from "react-nice-select";
 import ImageView from "../components/ImageView";
 import VideoPopup from "../components/VideoPopup";
 import { animation, sidebarClick } from "../utils";
@@ -9,7 +8,6 @@ import Header from "./header/Header";
 import SideBar from "./header/SideBar";
 const Layout = ({ children, header, footer, singleMenu, dark }) => {
   useEffect(() => {
-    niceSelect();
     animation();
     sidebarClick();
   }, []);

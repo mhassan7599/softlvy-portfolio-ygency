@@ -3652,7 +3652,7 @@ h6, .h6 {
   right: -350px;
   top: 0px;
   opacity: 0;
-  width: 350px;
+  width: 450px;
   height: 100%;
   z-index: 99999;
   overflow-y: auto;
@@ -3677,7 +3677,8 @@ h6, .h6 {
 
 .hidden-bar .inner-box {
   position: relative;
-  padding: 100px 40px 50px; }
+  padding: 100px 40px 50px; 
+}
   @media only screen and (max-width: 375px) {
     .hidden-bar .inner-box {
       padding-left: 25px;
@@ -3703,12 +3704,12 @@ h6, .h6 {
   .hidden-bar .appointment-form .form-group {
     position: relative;
     margin-bottom: 20px; }
-  .hidden-bar .appointment-form input[type="text"], .hidden-bar .appointment-form input[type="email"] {
+  .hidden-bar .appointment-form input, select {
     position: relative;
     display: block;
     width: 100%;
     line-height: 23px;
-    padding: 10px 25px;
+    padding: 15px 25px;
     color: #ffffff;
     font-size: 16px;
     background: none;
@@ -3721,7 +3722,7 @@ h6, .h6 {
     display: block;
     width: 100%;
     line-height: 23px;
-    padding: 10px 25px;
+    padding: 15px 25px;
     color: #ffffff;
     font-size: 16px;
     border: 1px solid rgba(255, 255, 255, 0.1);
