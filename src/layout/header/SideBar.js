@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
 import { useMutation, gql } from '@apollo/client';
 import * as Yup from 'yup';
-import client from '../../apollo/client';
 import { Fragment } from "react";
+import toast from "react-hot-toast";
 
 // const servicesSelect = ['Web Development', 'App Development', 'Search Engine Optimization', 'React.Js Development', 'UI/UX Design']
 
@@ -18,6 +18,7 @@ const CREATE_POST = gql`
 
 const SideBar = () => {
   const [createAppointment] = useMutation(CREATE_POST);
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -36,6 +37,7 @@ const SideBar = () => {
         await createAppointment({
           variables: { data: values },
         });
+        toast.success("Added successfully!")
         resetForm();
       } catch (error) {
         console.error('Error creating post:', error);

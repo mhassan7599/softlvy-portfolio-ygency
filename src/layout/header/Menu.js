@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 import { Fragment, useState } from "react";
 const Menu = ({ singleMenu }) => {
@@ -44,6 +43,11 @@ const DaskTopMenu = () => {
       <li>
         <Link legacyBehavior href="projects">
           Projects
+        </Link>
+      </li>
+      <li>
+        <Link legacyBehavior href="contact">
+          Contact
         </Link>
       </li>
     </ul>

@@ -4,6 +4,8 @@ import "@/styles/globals.css";
 import { ApolloProvider } from "@apollo/client";
 import Head from "next/head";
 import { Fragment, useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
+// import 'react-hot-toast/dist/index.css';
 
 export default function App({ Component, pageProps }) {
   const [loaded, setLoaded] = useState(false);
@@ -45,9 +47,11 @@ export default function App({ Component, pageProps }) {
       </Head>
       {!loaded && <PreLoader />}
       {loaded && (
-        <ApolloProvider client={client}>
-          <Component {...pageProps} />
-        </ApolloProvider>
+        <Toaster>
+          <ApolloProvider client={client}>
+            <Component {...pageProps} />
+          </ApolloProvider>
+        </Toaster>
       )}
     </Fragment>
   );
