@@ -1,5 +1,7 @@
+import client from "@/src/apollo/client";
 import PreLoader from "@/src/layout/PreLoader";
 import "@/styles/globals.css";
+import { ApolloProvider } from "@apollo/client";
 import Head from "next/head";
 import { Fragment, useEffect, useState } from "react";
 
@@ -17,23 +19,13 @@ export default function App({ Component, pageProps }) {
         <meta charSet="utf-8" />
         <meta name="description" content />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         {/* Title */}
         <title>Ygency - Web Agency React NextJS Template</title>
         {/* Favicon Icon */}
-        <link
-          rel="shortcut icon"
-          href="assets/images/favicon.png"
-          type="image/x-icon"
-        />
+        <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon" />
         {/* Google Fonts */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
         {/* Flaticon */}
         <link rel="stylesheet" href="assets/css/flaticon.min.css" />
         {/* Font Awesome */}
@@ -52,7 +44,11 @@ export default function App({ Component, pageProps }) {
         <link rel="stylesheet" href="assets/css/style.css" />
       </Head>
       {!loaded && <PreLoader />}
-      {loaded && <Component {...pageProps} />}
+      {loaded && (
+        <ApolloProvider client={client}>
+          <Component {...pageProps} />
+        </ApolloProvider>
+      )}
     </Fragment>
   );
 }

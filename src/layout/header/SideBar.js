@@ -7,9 +7,8 @@ import { Fragment } from "react";
 // const servicesSelect = ['Web Development', 'App Development', 'Search Engine Optimization', 'React.Js Development', 'UI/UX Design']
 
 const CREATE_POST = gql`
-  mutation CreatePost($name: String!, $email: String!, $message: String!) {
-    createPost(name: $name, email: $email, message: $message) {
-      id
+  mutation createAppointment($data: AppointmentCreateInput!) {
+    createAppointment(data: $data) {
       name
       email
       message
@@ -18,7 +17,7 @@ const CREATE_POST = gql`
 `;
 
 const SideBar = () => {
-  const [createPost] = useMutation(CREATE_POST, { client });
+  const [createAppointment] = useMutation(CREATE_POST);
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -34,14 +33,9 @@ const SideBar = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       try {
-        const { data } = await createPost({
-          variables: {
-            name: values.name,
-            email: values.email,
-            message: values.message,
-          },
+        await createAppointment({
+          variables: { data: values },
         });
-        console.log('Created Post:', data.createPost);
         resetForm();
       } catch (error) {
         console.error('Error creating post:', error);

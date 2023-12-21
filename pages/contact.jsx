@@ -1,6 +1,34 @@
 import PageBanner from "@/src/components/PageBanner";
 import Layout from "@/src/layout/Layout";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 const Contact = () => {
+  const initialValues = {
+    name: "",
+    phone_number: "",
+    email: "",
+    message: "",
+  };
+
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("Please enter your name"),
+    phone_number: Yup.string().required("Please enter your phone number"),
+    email: Yup.string().email("Invalid email address").required("Please enter your email address"),
+    message: Yup.string().required("Please enter your message"),
+  });
+
+  const handleSubmit = (values, { resetForm }) => {
+    console.log("Form values:", values);
+    resetForm();
+  };
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: handleSubmit,
+  });
+
   return (
     <Layout>
       {/* Page Banner Start */}
@@ -21,27 +49,14 @@ const Contact = () => {
                   </div>
                 </div>
                 <div className="row gap-80 pb-30">
-                  <div className="col-sm-6">
+                  <div className="col-sm-12">
                     <div className="our-location-address mb-40">
-                      <h5>New York</h5>
+                      <h5>Pakistan</h5>
                       <p>
-                        55 One State Road, 2nd Block New York, United States
+                        Ali Town, Punjab, Lahore
                       </p>
                       <a className="mailto" href="mailto:support@gmail.com">
-                        support@gmail.com
-                      </a>
-                      <br />
-                      <a className="callto" href="callto:+00012345688">
-                        <i className="fas fa-phone" /> +000 (123) 456 88
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-sm-6">
-                    <div className="our-location-address mb-40">
-                      <h5>Australia</h5>
-                      <p>67 One State Road, 2nd Block Melbourne, Australia</p>
-                      <a className="mailto" href="mailto:support@gmail.com">
-                        support@gmail.com
+                        softlvy@gmail.com
                       </a>
                       <br />
                       <a className="callto" href="callto:+00012345688">
